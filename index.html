@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Warm Hug — For You</title>
+<style>
+:root{
+--bg1:#fff7fb;--bg2:#fff1f9;--accent1:#ff9ac2;--accent2:#cdb4ff;--muted:#58464e;--glass:rgba(255,255,255,.48);--shadow:rgba(60,30,60,.12);--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;background:linear-gradient(160deg,var(--bg1),var(--bg2) 60%);color:var(--muted);overflow-x:hidden;line-height:1.45}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{display:grid;grid-template-columns:420px 1fr;gap:28px;width:min(1080px,100%)}
+@media(max-width:980px){.container{grid-template-columns:1fr;padding-bottom:120px}}
+.card{background:rgba(255,255,255,.6);border-radius:var(--radius);padding:24px;box-shadow:0 20px 50px var(--shadow);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7);transition:.4s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 30px 70px rgba(70,30,70,.15)}
+.avatar{width:96px;height:96px;border-radius:18px;display:grid;place-items:center;font-size:44px;color:white;background:linear-gradient(135deg,var(--accent1),var(--accent2))}
+.greet h1{font-size:22px;color:#402532;margin-bottom:4px}.greet p{color:#6a4f59;margin-bottom:6px}.distance-badge{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.7);font-weight:600;color:#472a34;margin-top:10px}
+.btn{padding:10px 14px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;transition:.18s ease;box-shadow:0 8px 24px rgba(200,120,160,.08);border:none}
+.btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white}.btn-ghost{background:transparent;border:1px solid rgba(60,30,40,.06);color:var(--muted)}
+.main{padding:18px;display:flex;flex-direction:column;gap:18px}
+.hero-large{background:rgba(255,255,255,.7);border-radius:var(--radius);padding:20px;box-shadow:0 20px 50px rgba(80,40,80,.06);border:1px solid rgba(255,255,255,.6)}
+.hero-title{font-size:28px;color:#4b2f36;margin-bottom:6px}.hero-sub{color:#6b565f;margin-bottom:12px}
+.notes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+@media(max-width:980px){.notes-grid{grid-template-columns:1fr}}
+.note-card{background:rgba(255,255,255,.82);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.6);box-shadow:0 8px 20px rgba(80,30,70,.04)}
+.note-card h3{font-size:15px;margin-bottom:4px}.note-card p{color:#6b565f}
+.decor-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}.decor{position:absolute;will-change:transform,opacity}.overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.12);opacity:0;pointer-events:none;transition:.22s ease;z-index:80}.overlay.open{opacity:1;pointer-events:auto}
+.modal{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:0 30px 80px rgba(80,40,80,.14);border:1px solid rgba(255,255,255,.7);max-width:90%;width:500px}
+.close-x{background:transparent;border:0;font-size:22px;color:#a44;cursor:pointer}
+.game-card{background:rgba(255,255,255,.9);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,.7);box-shadow:0 12px 30px rgba(80,40,80,.06)}
+.game-area{height:140px;position:relative;background:linear-gradient(180deg,rgba(255,245,250,.6),rgba(255,250,245,.6));border-radius:10px;overflow:hidden}
+.game-love{position:absolute;font-size:34px;cursor:pointer;transition:.15s ease}
+.game-score{margin-top:10px;font-weight:700;color:#5a2a3b}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="container">
+<section class="card">
+<div style="display:flex;gap:16px;align-items:center;margin-bottom:10px">
+<div class="avatar">💞</div>
+<div class="greet">
+<h1>My Madam ji, You’re Strong and Beautiful 💕</h1>
+<p>A little corner I made to give you a warm hug.</p>
+<div class="distance-badge">800 kms away, sending love ✨</div>
+</div>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+<button class="btn btn-primary" id="openLetterBtn">Open Love Letter</button>
+<button class="btn btn-primary" id="virtualHugBtn">Send Virtual Hug</button>
+<button class="btn btn-ghost" id="openGamesBtn">Play Mini Games</button>
+</div>
+</section>
+<main class="main">
+<section class="hero-large">
+<h2 class="hero-title">My Doraemon, You’re Cute and Brave💕</h2>
+<p class="hero-sub">Soft pastel comfort, little pleasures, and my whole heart, packaged into one tiny webpage.</p>
+<div class="notes-grid">
+<article class="note-card"><h3>Rest first</h3><p>Cover up with blankets and let today be slow.</p></article>
+<article class="note-card"><h3>Eat snacks</h3><p>Don’t forget your favorite spicy food.</p></article>
+<article class="note-card"><h3>Gentle moves</h3><p>Warm compress, light stretches, or a soothing bath.</p></article>
+<article class="note-card"><h3>You’re loved</h3><p>Every day, I love you more for your strength.</p></article>
+</div>
+</section>
+<section class="game-card">
+<h3>Playful Corner, Catch my love!</h3>
+<div class="game-area" id="gameArea"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+<div class="game-score">Score: <span id="gameScore">0</span></div>
+<div style="display:flex;gap:8px">
+<button class="btn btn-primary" id="gameReset">Reset</button>
+<button class="btn btn-ghost" id="gameHint">Hint</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+<div class="decor-layer" id="decorLayer"></div>
+<div class="overlay" id="letterOverlay">
+<div class="modal">
+<header style="display:flex;justify-content:space-between;align-items:center">
+<h2>Love Letter 💌</h2>
+<button class="close-x" id="closeLetterBtn">✕</button>
+</header>
+<div style="margin-top:12px" id="loveLetterContent"></div>
+</div>
+</div>
+<div class="overlay" id="hugOverlay">
+<div class="modal">
+<header style="display:flex;justify-content:space-between;align-items:center">
+<h2>Virtual Hug 🤗</h2>
+<button class="close-x" id="closeHugBtn">✕</button>
+</header>
+<div style="text-align:center;font-size:78px;margin-top:12px">💓</div>
+</div>
+</div>
+<div class="overlay" id="gamesOverlay">
+<div class="modal">
+<header style="display:flex;justify-content:space-between;align-items:center">
+<h2>Mini Games 🎮</h2>
+<button class="close-x" id="closeGamesBtn">✕</button>
+</header>
+<div style="margin-top:12px"><button class="btn btn-primary" id="openCatchGame">Catch My Love</button></div>
+<div id="miniGameArea" style="min-height:120px;margin-top:12px"></div>
+</div>
+</div>
+<script>
+// Utility
+const q=s=>document.querySelector(s);
+const qa=s=>Array.from(document.querySelectorAll(s));
+const decorLayer=q('#decorLayer');
+// Floating decorations
+function spawnDecor(){
+const c=['💗','🌸','✨','🌙','🌺','💞','🍃'];const el=document.createElement('div');el.innerText=c[Math.floor(Math.random()*c.length)];el.className='decor';const size=18+Math.random()*34;el.style.fontSize=size+'px';el.style.left=Math.random()*110+'vw';el.style.top=70+Math.random()*25+'vh';el.style.animation=`riseSlow ${12+Math.random()*16}s linear forwards`;el.style.transform=`rotate(${Math.random()*180-90}deg)`;decorLayer.appendChild(el);setTimeout(()=>el.remove(),18000);}
+for(let i=0;i<10;i++)setTimeout(spawnDecor,i*500);
+setInterval(spawnDecor,1900);
+// Letter content
+q('#loveLetterContent').innerHTML=`<p><strong>My Love,</strong></p><p>I just want to remind you how amazing you are. Rest, feel pampered, and remember I love you 💕</p>`;
+// Modal functions
+function openModal(id){const el=q(id);el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function closeModal(id){const el=q(id);el.classList.remove('open');el.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+q('#openLetterBtn').onclick=()=>openModal('#letterOverlay');
+q('#closeLetterBtn').onclick=()=>closeModal('#letterOverlay');
+q('#virtualHugBtn').onclick=()=>openModal('#hugOverlay');
+q('#closeHugBtn').onclick=()=>closeModal('#hugOverlay');
+q('#openGamesBtn').onclick=()=>openModal('#gamesOverlay');
+q('#closeGamesBtn').onclick=()=>closeModal('#gamesOverlay');
+// Keyboard shortcuts
+window.addEventListener('keydown',e=>{if(e.key==='h')openModal('#hugOverlay');if(e.key==='l')openModal('#letterOverlay');if(e.key==='g')openModal('#gamesOverlay');});
+// Game
+const gameArea=q('#gameArea');const scoreSpan=q('#gameScore');let gameScore=0;let gameInterval=null;
+function spawnGameHeart(){const h=document.createElement('div');h.className='game-love';h.innerText=['❤️','💗','❣️'][Math.floor(Math.random()*3)];const size=28+Math.random()*32;h.style.fontSize=size+'px';h.style.left=Math.random()*(gameArea.clientWidth-size)+'px';h.style.top=Math.random()*(gameArea.clientHeight-size)+'px';h.style.opacity=0;h.style.transform='scale(0.6)';gameArea.appendChild(h);requestAnimationFrame(()=>{h.style.transition='all .36s cubic-bezier(.2,.9,.2,1)';h.style.opacity=1;h.style.transform='scale(1)';});h.onclick=()=>{gameScore+=Math.max(1,Math.round(40/size));scoreSpan.innerText=gameScore;h.remove()};setTimeout(()=>h.remove(),5000);}
+function startGame(){if(gameInterval)clearInterval(gameInterval);gameInterval=setInterval(spawnGameHeart,900);}
+startGame();q('#gameReset').onclick=()=>{gameScore=0;scoreSpan.innerText=0};q('#gameHint').onclick=()=>alert('Tap the floating hearts to collect points — each heart is a little hug!');
+</script>
+</body>
+</html>
